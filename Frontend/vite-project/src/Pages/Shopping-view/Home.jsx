@@ -64,6 +64,7 @@ const ShoppingHome = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
+console.log(featureImageList,'Featureimagelist');
 
   function handleNavigateToListingPage(getCurrentItem, section) {
     sessionStorage.removeItem("filters");
@@ -82,16 +83,14 @@ const ShoppingHome = () => {
   function handleAddtoCart(getCurrentProductId) {
     dispatch(
       addToCart({
-        userId: user?.id,
+        userId: user?.userId,
         productId: getCurrentProductId,
         quantity: 1,
       })
     ).then((data) => {
       if (data?.payload?.success) {
-        dispatch(fetchCartItems(user?.id));
-        toast({
-          title: "Product is added to cart",
-        });
+        dispatch(fetchCartItems(user?.userId));
+        toast.success("Product is added to cart");
       }
     });
   }
@@ -125,7 +124,7 @@ const ShoppingHome = () => {
 
   return (
        <div className="flex flex-col min-h-screen">
-      <div className="relative w-full h-[600px] overflow-hidden">
+      <div className="relative w-full h-[20vh] sm:h-[50vh] md:h-[70vh] lg:h-[80vh] overflow-hidden">
         {featureImageList && featureImageList.length > 0
           ? featureImageList.map((slide, index) => (
               <img
@@ -133,7 +132,7 @@ const ShoppingHome = () => {
                 key={index}
                 className={`${
                   index === currentSlide ? "opacity-100" : "opacity-0"
-                } absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000`}
+                } absolute object-cover top-0 left-0 w-full h-full object-cover transition-opacity duration-1000`}
               />
             ))
           : null}

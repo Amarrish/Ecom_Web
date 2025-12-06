@@ -20,7 +20,7 @@ store.dispatch(checkAuth()).finally(() => {
       <BrowserRouter>
         <Provider store={store}>
           <App />
-          <Toaster richColors position="top-right" />
+          <Toaster richColors position="top-right" className='cursor-pointer text-xs'/>
         </Provider>
       </BrowserRouter>
     </StrictMode>

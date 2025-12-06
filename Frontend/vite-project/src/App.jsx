@@ -40,8 +40,8 @@ function App() {
 console.log(isLoading, user);
 
   return (
-  <div className='flex flex-col overflow-hidden bg-white'>
-    {/* <h1>Header component</h1> */}
+  <div className='flex flex-col bg-white'>
+  
 
     <Routes>
 

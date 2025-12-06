@@ -4,9 +4,9 @@ import { Outlet } from 'react-router-dom'
 
 const ShoppingLayout = () => {
   return (
-    <div className='flex flex-col bg-whitw overflow-hidden'>
+    <div className='flex flex-col bg-white'>
         {/* common header */}
-        <h1>Shopping </h1>
+      
         <ShoppingHeader/>
         <main className='flex flex-col w-full'>
             <Outlet/>

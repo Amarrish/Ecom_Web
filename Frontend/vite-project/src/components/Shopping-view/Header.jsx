@@ -64,7 +64,7 @@ function HeaderRightContent() {
   return (
     <div className="flex lg:items-center lg:flex-row flex-col gap-4">
       <Sheet className='bg-amber-400' open={openCartSheet} onOpenChange={() => setOpenCartSheet(false)}>
-        <Button onClick={() => setOpenCartSheet(true)} variant="outline" size="icon" className="relative" >
+        <Button onClick={() => setOpenCartSheet(true)} variant="outline" size="icon" className="relative cursor-pointer" >
           <ShoppingCart className="w-6 h-6" />
           <span className="absolute top-[-5px] right-[2px] font-bold text-xs">
             {cartItems?.items?.length || 0}
@@ -80,7 +80,7 @@ function HeaderRightContent() {
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Avatar className="bg-black">
+          <Avatar className="bg-black cursor-pointer">
             <AvatarFallback className="bg-black text-white font-extrabold">
              {user?.username?.[0]?.toUpperCase() || "U"}
             </AvatarFallback>
@@ -108,7 +108,7 @@ function HeaderRightContent() {
 const ShoppingHeader = () => {
    const { isAuthenticated } = useSelector((state) => state.auth);
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background">
+    <header className="sticky top-0 z-40 w-full border-b bg-amber-400">
       <div className="flex h-16 items-center justify-between px-4 md:px-6">
         <Link to="/shop/home" className="flex items-center gap-2">
           <HousePlug className="h-6 w-6" />
@@ -123,14 +123,14 @@ const ShoppingHeader = () => {
           </SheetTrigger>
           <SheetContent side="left" className="w-full max-w-xs">
             <MenuItems />
-            <HeaderRightContent />
+            <HeaderRightContent/>
           </SheetContent>
         </Sheet>
         <div className="hidden lg:block">
           <MenuItems />
         </div>
 
-        <div className="hidden lg:block">
+        <div className="hidden lg:block cursor-pointer">
           <HeaderRightContent />
         </div>
       </div>
