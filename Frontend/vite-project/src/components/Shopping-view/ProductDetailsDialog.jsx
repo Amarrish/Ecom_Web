@@ -22,6 +22,9 @@ const ProductDetailsDialog = ({ open, setOpen, productDetails }) => {
   const { cartItems } = useSelector((state) => state.shopCart);
   const { reviews } = useSelector((state) => state.shopReview);
 
+console.log(reviews,"reviewssss");
+console.log(user,"user");
+
 
   function handleRatingChange(getRating) {
     console.log(getRating, "getRating");
@@ -39,10 +42,7 @@ const ProductDetailsDialog = ({ open, setOpen, productDetails }) => {
       if (indexOfCurrentItem > -1) {
         const getQuantity = getCartItems[indexOfCurrentItem].quantity;
         if (getQuantity + 1 > getTotalStock) {
-          toast({
-            title: `Only ${getQuantity} quantity can be added for this item`,
-            variant: "destructive",
-          });
+          toast( `Only ${getQuantity} quantity can be added for this item`);
 
           return;
         }
@@ -50,16 +50,14 @@ const ProductDetailsDialog = ({ open, setOpen, productDetails }) => {
     }
     dispatch(
       addToCart({
-        userId: user?.id,
+        userId: user?.userId,
         productId: getCurrentProductId,
         quantity: 1,
       })
     ).then((data) => {
       if (data?.payload?.success) {
-        dispatch(fetchCartItems(user?.id));
-        toast({
-          title: "Product is added to cart",
-        });
+        dispatch(fetchCartItems(user?.userId));
+        toast("Product is added to cart");
       }
     });
   }
@@ -73,23 +71,25 @@ const ProductDetailsDialog = ({ open, setOpen, productDetails }) => {
 
   function handleAddReview() {
     dispatch(
-      addReview({
-        productId: productDetails?._id,
-        userId: user?.id,
-        userName: user?.userName,
-        reviewMessage: reviewMsg,
-        reviewValue: rating,
-      })
-    ).then((data) => {
-      if (data.payload.success) {
-        setRating(0);
-        setReviewMsg("");
-        dispatch(getReviews(productDetails?._id));
-        toast({
-          title: "Review added successfully!",
-        });
-      }
-    });
+  addReview({
+    productId: productDetails?._id,
+    userId: user?.userId,
+    username: user?.username,
+    reviewMessage: reviewMsg,
+    reviewValue: rating,
+  })
+).then((res) => {
+  if (res.type.includes("fulfilled")) {
+    setRating(0);
+    setReviewMsg("");
+    dispatch(getReviews(productDetails?._id));
+    toast("Review added successfully!");
+  }
+
+  if (res.type.includes("rejected")) {
+    toast(res.payload.message || "You already reviewed this product!");
+  }
+});
   }
 
   useEffect(() => {
@@ -107,7 +107,7 @@ const ProductDetailsDialog = ({ open, setOpen, productDetails }) => {
   return (
       <Dialog open={open} onOpenChange={handleDialogClose}>
       <DialogContent className="grid grid-cols-1 md:grid-cols-2 gap-8 p-4 sm:p-8 md:p-12 
-             max-w-[90vw] max-h-[90vh] sm:max-w-[80vw] lg:max-w-[70vw] overflow-scroll">
+             max-w-[90vw] max-h-[90vh] sm:max-w-[80vw] lg:max-w-[70vw] overflow-auto">
         <div className="relative overflow-hidden rounded-lg">
           <img
             src={productDetails?.image}
@@ -164,35 +164,42 @@ const ProductDetailsDialog = ({ open, setOpen, productDetails }) => {
             )}
           </div>
           <Separator />
-          <div className="max-h-[300px] overflow-auto">
+          <div className="max-h-[300px]">
             <h2 className="text-sm font-bold mb-4">Reviews</h2>
-            <div className="grid gap-6">
+        <div className="grid gap-6">
               {reviews && reviews.length > 0 ? (
-                reviews.map((reviewItem) => (
-                  <div className="flex gap-4">
-                    <Avatar className="w-10 h-10 border">
-                      <AvatarFallback>
-                        {reviewItem?.userName[0].toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div className="grid gap-1">
-                      <div className="flex items-center gap-2">
-                        <h3 className="font-bold">{reviewItem?.userName}</h3>
+                reviews.map((reviewItem) => {
+                  const displayName =
+                    reviewItem?.username ||
+                    reviewItem?.userName ||
+                    reviewItem?.name ||
+                    "User";
+                  const initial = displayName?.charAt(0)?.toUpperCase() || "?";
+
+                  return (
+                    <div className="flex gap-4" key={reviewItem._id || `${displayName}-${Math.random()}`}>
+                      <Avatar className="w-10 h-10 border">
+                        <AvatarFallback>{initial}</AvatarFallback>
+                      </Avatar>
+                      <div className="grid gap-1">
+                        <div className="flex items-center gap-2">
+                          <h3 className="font-bold">{displayName}</h3>
+                        </div>
+                        <div className="flex items-center gap-0.5">
+                          <StarRatingComponent rating={reviewItem?.reviewValue} />
+                        </div>
+                        <p className="text-muted-foreground">
+                          {reviewItem?.reviewMessage}
+                        </p>
                       </div>
-                      <div className="flex items-center gap-0.5">
-                        <StarRatingComponent rating={reviewItem?.reviewValue} />
-                      </div>
-                      <p className="text-muted-foreground">
-                        {reviewItem.reviewMessage}
-                      </p>
                     </div>
-                  </div>
-                ))
+                  );
+                })
               ) : (
-                <h1 className='text-xs'>No Reviews</h1>
+                <h1 className="text-xs">No Reviews</h1>
               )}
             </div>
-            <div className="mt-10 flex-col flex gap-2">
+            <div className="mt-10 flex-col flex gap-2 ">
               <Label className='text-xs'>Write a review</Label>
               <div className="flex gap-1">
                 <StarRatingComponent

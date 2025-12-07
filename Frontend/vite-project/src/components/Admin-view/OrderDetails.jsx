@@ -42,34 +42,34 @@ const OrderDetails = ({ orderDetails }) => {
   }
 
   return (
-     <DialogContent className="sm:max-w-[600px]">
+     <DialogContent className="sm:max-w-[600px] h-[80vh] overflow-y-auto">
       <div className="grid gap-6">
-        <div className="grid gap-2">
+        <div className="grid gap-2 text-xs">
           <div className="flex mt-6 items-center justify-between">
             <p className="font-medium">Order ID</p>
-            <Label>{orderDetails?._id}</Label>
+            <Label className="text-xs">{orderDetails?._id}</Label>
           </div>
           <div className="flex mt-2 items-center justify-between">
             <p className="font-medium">Order Date</p>
-            <Label>{orderDetails?.orderDate.split("T")[0]}</Label>
+            <Label className="text-xs">{orderDetails?.orderDate.split("T")[0]}</Label>
           </div>
           <div className="flex mt-2 items-center justify-between">
             <p className="font-medium">Order Price</p>
-            <Label>${orderDetails?.totalAmount}</Label>
+            <Label className="text-xs">${orderDetails?.totalAmount}</Label>
           </div>
           <div className="flex mt-2 items-center justify-between">
             <p className="font-medium">Payment method</p>
-            <Label>{orderDetails?.paymentMethod}</Label>
+            <Label className="text-xs">{orderDetails?.paymentMethod}</Label>
           </div>
           <div className="flex mt-2 items-center justify-between">
             <p className="font-medium">Payment Status</p>
-            <Label>{orderDetails?.paymentStatus}</Label>
+            <Label className="text-xs">{orderDetails?.paymentStatus}</Label>
           </div>
           <div className="flex mt-2 items-center justify-between">
             <p className="font-medium">Order Status</p>
             <Label>
               <Badge
-                className={`py-1 px-3 ${
+                className={`py-1 px-3 text-xs ${
                   orderDetails?.orderStatus === "confirmed"
                     ? "bg-green-500"
                     : orderDetails?.orderStatus === "rejected"
@@ -83,7 +83,7 @@ const OrderDetails = ({ orderDetails }) => {
           </div>
         </div>
         <Separator />
-        <div className="grid gap-4">
+        <div className="grid gap-4 text-xs">
           <div className="grid gap-2">
             <div className="font-medium">Order Details</div>
             <ul className="grid gap-3">
@@ -99,22 +99,23 @@ const OrderDetails = ({ orderDetails }) => {
             </ul>
           </div>
         </div>
-        <div className="grid gap-4">
+        <div className="grid gap-4 text-xs">
           <div className="grid gap-2">
             <div className="font-medium">Shipping Info</div>
-            <div className="grid gap-0.5 text-muted-foreground">
-              <span>{user.userName}</span>
-              <span>{orderDetails?.addressInfo?.address}</span>
-              <span>{orderDetails?.addressInfo?.city}</span>
-              <span>{orderDetails?.addressInfo?.pincode}</span>
-              <span>{orderDetails?.addressInfo?.phone}</span>
-              <span>{orderDetails?.addressInfo?.notes}</span>
+            <div className="grid gap-0.5 text-muted-foreground text-xs">
+              <span>Name: {user.userName}</span>
+              <span>Address: {orderDetails?.addressInfo?.address}</span>
+              <span>City: {orderDetails?.addressInfo?.city}</span>
+              <span>Pincode: {orderDetails?.addressInfo?.pincode}</span>
+              <span>Phone: {orderDetails?.addressInfo?.phone}</span>
+              <span>Landmark: {orderDetails?.addressInfo?.notes}</span>
             </div>
           </div>
         </div>
 
         <div>
           <CommonForm
+          className="text-xs"
             formControls={[
               {
                 label: "Order Status",

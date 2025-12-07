@@ -29,7 +29,6 @@ const Register = () => {
     toast.success(res.payload.message);
     navigate('/auth/login');
   } else {
-    console.log("Registration error:", res);
     
     toast.error(res.payload?.message || "Registration failed");
   }

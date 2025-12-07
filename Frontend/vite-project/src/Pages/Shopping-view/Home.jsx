@@ -60,11 +60,13 @@ const ShoppingHome = () => {
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
 
   const { user } = useSelector((state) => state.auth);
+  console.log(user,"user from home");
+  
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
-console.log(featureImageList,'Featureimagelist');
+// console.log(featureImageList,'Featureimagelist');
 
   function handleNavigateToListingPage(getCurrentItem, section) {
     sessionStorage.removeItem("filters");

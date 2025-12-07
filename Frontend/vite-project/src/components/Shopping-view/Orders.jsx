@@ -25,13 +25,16 @@ const Orders = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { orderList, orderDetails } = useSelector((state) => state.shopOrder);
+  console.log(orderList,"orderList");
+    console.log(orderDetails,"orderDetails");
+console.log(user.userId,"userId from order");
 
   function handleFetchOrderDetails(getId) {
     dispatch(getOrderDetails(getId));
   }
 
   useEffect(() => {
-    dispatch(getAllOrdersByUserId(user?.id));
+    dispatch(getAllOrdersByUserId(user?.userId));
   }, [dispatch]);
 
   useEffect(() => {
@@ -57,7 +60,7 @@ const Orders = () => {
               </TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody>
+          <TableBody className='text-sm'>
             {orderList && orderList.length > 0
               ? orderList.map((orderItem) => (
                   <TableRow>

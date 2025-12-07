@@ -5,7 +5,7 @@ import { SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
 import CartItemsContent from "./CartItemContent";
 
 const CartWrapper = ({ cartItems, setOpenCartSheet}) => {
-console.log(cartItems,"cartwrapper");
+
 
      const navigate = useNavigate();
 

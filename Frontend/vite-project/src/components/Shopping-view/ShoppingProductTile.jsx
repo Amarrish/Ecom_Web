@@ -5,9 +5,9 @@ import { brandOptionsMap, categoryOptionsMap } from "@/Config";
 import { Badge } from "../ui/badge";
 
 const ShoppingProductTile = ({ product,handleGetProductDetails,handleAddtoCart,}) => {
-  console.log(product,"product tile");
-  console.log(product?._id,"productID");
-  console.log(product?.totalStock,"product stock");
+  // console.log(product,"product tile");
+  // console.log(product?._id,"productID");
+  // console.log(product?.totalStock,"product stock");
   
   return (
      <Card className="w-full max-w-sm mx-auto cursor-pointer hover:shadow-xl transition-shadow duration-300">

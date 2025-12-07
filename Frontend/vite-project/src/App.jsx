@@ -21,9 +21,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Skeleton } from './components/ui/skeleton'
 import { useEffect } from 'react'
 import { checkAuth } from './store/auth-slice'
-import Sampleone from './Pages/sample/Sampleone'
-import Sampletwo from './Pages/sample/Sampletwo'
-import Samplethree from './Pages/sample/Samplethree'
+import PaymentSuccess from './Pages/Shopping-view/PaymentSuccess'
+import PaypalReturn from './Pages/Shopping-view/PaypalReturn'
+import Search from './Pages/Shopping-view/Search'
 
 function App() {
 
@@ -37,7 +37,6 @@ function App() {
 
  if (isLoading) return <Skeleton className="h-[20px] w-[100px] rounded-full" />
  
-console.log(isLoading, user);
 
   return (
   <div className='flex flex-col bg-white'>
@@ -77,12 +76,10 @@ console.log(isLoading, user);
           <Route path='listing' element={<ShoppingListing/>}/>
           <Route path='checkout' element={<ShoppingCheckout/>}/>
           <Route path='accounts' element={<ShoppingAccount/>}/>
+          <Route path='payment-success' element={<PaymentSuccess/>}/>
+          <Route path='paypal-return' element={<PaypalReturn/>}/>
+           <Route path='search' element={<Search/>}/>
         </Route>
-
-        <Route path='/smone' element={<Sampleone/>}/>
-        <Route path='/smtwo' element={<Sampletwo/>}/>
-        <Route path='/smth' element={<Samplethree/>}/>
-
 
         <Route path='/unauth-page' element={<Unauth/>}/>
         <Route path='*' element={<NotFound/>}/>

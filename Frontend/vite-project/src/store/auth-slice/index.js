@@ -39,6 +39,7 @@ export const loginUser = createAsyncThunk(
     try {
       const response = await axios.post("http://localhost:5000/api/auth/login",formData,{ withCredentials:true });
       
+      console.log(response,"login");
       
       return response.data;
     } catch (error) {
@@ -66,15 +67,26 @@ export const logoutUser = createAsyncThunk("auth/logout", async()=>{
 });
 
 // Check Auth
-export const checkAuth = createAsyncThunk("auth/checkAuth", async()=>{
-
-        const response = await axios.get('http://localhost:5000/api/auth/checkAuth',
-        {
+export const checkAuth = createAsyncThunk(
+  "auth/checkAuth",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/auth/checkAuth", {
         withCredentials: true,
-        headers: {"Cache-Control": "no-cache, no-store, must-revalidate, proxy-revalidate"},
-    });
-        return response.data;
-        });
+        headers: {
+          "Cache-Control": "no-cache, no-store, must-revalidate, proxy-revalidate",
+        },
+      });
+      return response.data;
+    } catch (error) {
+      // Pass backend error to rejected action
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      }
+      return rejectWithValue({ message: "Something went wrong" });
+    }
+  }
+);
 
 const authSlice = createSlice({
     name: 'auth',

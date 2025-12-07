@@ -109,6 +109,17 @@ const logoutUser = (req, res) => {
     })
 }
 
+// Check Auth
+const checkAuth = (req, res) => {
+    const user = req.user; // set by authMiddleware
+    
+    res.status(200).json({
+        success: true,
+        message: 'Authenticated user!',
+        user,
+    });
+};
+
 // auth middleware
 const authMiddleware = (req, res, next) => {
     const token = req.cookies.token;
@@ -131,4 +142,4 @@ const authMiddleware = (req, res, next) => {
 
 }
 
-module.exports = { registerUser, loginUser, logoutUser, authMiddleware };
+module.exports = { registerUser, loginUser, logoutUser, checkAuth, authMiddleware };
