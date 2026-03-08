@@ -41,7 +41,7 @@ const Login = () => {
         setFormData={setFormData}
         onSubmit={onSubmit}
       />
-    <p className='text-xs'>Forget your  password <Link className='underline'>Click here</Link></p>
+    <p className='text-xs'>Forget your  password <Link to='/forgot-password' className='underline'>Click here</Link></p>
        <p className='mt-2 text-xs'>
           Dont have an account
           <Link to="/auth/register" className='font-medium text-primary hover:underline ml-1'>

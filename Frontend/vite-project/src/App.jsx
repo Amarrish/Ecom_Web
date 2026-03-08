@@ -1,6 +1,6 @@
 
 import './App.css'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom'
 import AuthLayout from './components/auth/Layout'
 import Login from './Pages/auth/Login'
 import Register from './Pages/auth/Register'
@@ -24,6 +24,8 @@ import { checkAuth } from './store/auth-slice'
 import PaymentSuccess from './Pages/Shopping-view/PaymentSuccess'
 import PaypalReturn from './Pages/Shopping-view/PaypalReturn'
 import Search from './Pages/Shopping-view/Search'
+import Forgotten from './Pages/auth/Forgotten'
+import ResetPassword from './Pages/auth/ResetPassword'
 
 function App() {
 
@@ -43,6 +45,11 @@ function App() {
   
 
     <Routes>
+      <Route path="/" element={ isAuthenticated  ? <Navigate to="/shop/home" /> : <Navigate to="/auth/login" />
+} />
+
+<Route path='forgot-password' element={<Forgotten />} />
+<Route path="/reset-password/:token" element={<ResetPassword />} />
 
       <Route path='/auth' element={
           <CheckAuth isAuthenticated={isAuthenticated} user={user}>
@@ -51,6 +58,7 @@ function App() {
         }>
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />
+         
       </Route>
 
 

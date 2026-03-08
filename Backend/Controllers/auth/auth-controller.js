@@ -1,6 +1,10 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../../Models/User');
+
+const crypto = require("crypto");
+const sendEmail = require("../../Helpers/sendEmail");
+
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -120,6 +124,100 @@ const checkAuth = (req, res) => {
     });
 };
 
+// forgottenPassword
+const forgotPassword = async (req, res) => {
+
+  const { email } = req.body;
+
+  try {
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    const resetToken = crypto.randomBytes(32).toString("hex");
+
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
+
+    await user.save();
+
+    const resetURL =
+      `http://localhost:5173/reset-password/${resetToken}`;
+
+    const message = `
+Password Reset Link:
+
+${resetURL}
+
+This link will expire in 15 minutes.
+`;
+
+    await sendEmail(email, "Password Reset", message);
+
+    res.json({
+      success: true,
+      message: "Reset link sent to email",
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+
+  }
+};
+
+// Reset Password
+const resetPassword = async (req, res) => {
+
+  try {
+
+    const { token } = req.params;
+    const { password } = req.body;
+
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpire: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or expired token",
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    user.password = hashedPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+
+    await user.save();
+
+    res.json({
+      success: true,
+      message: "Password reset successful",
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+
+  }
+};
+
 // auth middleware
 const authMiddleware = (req, res, next) => {
     const token = req.cookies.token;
@@ -142,4 +240,4 @@ const authMiddleware = (req, res, next) => {
 
 }
 
-module.exports = { registerUser, loginUser, logoutUser, checkAuth, authMiddleware };
+module.exports = { registerUser, loginUser, logoutUser, checkAuth, authMiddleware, forgotPassword, resetPassword  };

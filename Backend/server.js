@@ -16,6 +16,8 @@ const shopReviewRouter = require("./Routes/shop/ReviewRoutes")
 const shopSearchRouter =require("./Routes/shop/SearchRoute")
 
 
+
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB Connected'))
@@ -25,10 +27,17 @@ const app = express()
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: process.env.CLIENT_URL,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Cache-Control', 'Expires', 'Pragma'],
-    credentials: true
+  origin: function(origin, callback) {
+    const allowedOrigins = [process.env.CLIENT_URL, 'http://localhost:5174'].filter(Boolean);
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      return callback(null, true);
+    }
+    return callback(new Error('CORS policy: Origin not allowed'));
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cache-Control', 'Expires', 'Pragma'],
+  credentials: true
 }))
 
 app.use(cookieParser());
@@ -44,6 +53,10 @@ app.use("/api/shop/order", shopOrderRouter);
 app.use("/api/shop/search", shopSearchRouter);
 app.use("/api/shop/review", shopReviewRouter);
 app.use("/api/common/feature", commonFeatureRouter);
+
+
+
+
 
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
