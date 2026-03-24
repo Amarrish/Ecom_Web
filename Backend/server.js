@@ -15,9 +15,6 @@ const shopOrderRouter =require("./Routes/shop/OrderRoutes")
 const shopReviewRouter = require("./Routes/shop/ReviewRoutes")
 const shopSearchRouter =require("./Routes/shop/SearchRoute")
 
-
-
-
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB Connected'))
@@ -54,9 +51,5 @@ app.use("/api/shop/search", shopSearchRouter);
 app.use("/api/shop/review", shopReviewRouter);
 app.use("/api/common/feature", commonFeatureRouter);
 
-
-
-
-
-
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+// app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+module.exports = app;
