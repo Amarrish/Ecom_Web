@@ -15,17 +15,32 @@ const shopOrderRouter =require("./Routes/shop/OrderRoutes")
 const shopReviewRouter = require("./Routes/shop/ReviewRoutes")
 const shopSearchRouter =require("./Routes/shop/SearchRoute")
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB Connected'))
-  .catch(err => console.log(err));
+// mongoose
+//   .connect(process.env.MONGO_URI)
+//   .then(() => console.log('MongoDB Connected'))
+//   .catch(err => console.log(err));
 
+let isConnected = false;
+
+const connectDB = async () => {
+  if (isConnected) return;
+
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    isConnected = true;
+    console.log("MongoDB Connected");
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+connectDB();
 const app = express()
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
   origin: function(origin, callback) {
-    const allowedOrigins = [process.env.CLIENT_URL, 'http://localhost:5174'].filter(Boolean);
+    const allowedOrigins = [process.env.CLIENT_URL, 'https://ecom-web-lgh3.vercel.app/'].filter(Boolean);
     if (!origin) return callback(null, true);
     if (allowedOrigins.indexOf(origin) !== -1) {
       return callback(null, true);
