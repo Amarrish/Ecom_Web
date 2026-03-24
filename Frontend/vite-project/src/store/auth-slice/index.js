@@ -14,7 +14,7 @@ export const registerUser = createAsyncThunk(
   "auth/register",
   async (formData, { rejectWithValue }) => {
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/register",formData,{ withCredentials:true });
+      const response = await axios.post("https://ecom-web-woad.vercel.app/api/auth/register",formData,{ withCredentials:true });
       return response.data;
     } catch (error) {
       // Pass backend error to rejected action
@@ -37,7 +37,7 @@ export const loginUser = createAsyncThunk(
   "auth/login",
   async (formData, { rejectWithValue }) => {
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login",formData,{ withCredentials:true });
+      const response = await axios.post("https://ecom-web-woad.vercel.app/api/auth/login",formData,{ withCredentials:true });
       
       console.log(response,"login");
       
@@ -62,7 +62,7 @@ export const loginUser = createAsyncThunk(
 // Logout User
 
 export const logoutUser = createAsyncThunk("auth/logout", async()=>{
-    const response = await axios.post('http://localhost:5000/api/auth/logout', {}, {withCredentials: true});
+    const response = await axios.post('https://ecom-web-woad.vercel.app/api/auth/logout', {}, {withCredentials: true});
     return response.data;
 });
 
@@ -71,7 +71,7 @@ export const checkAuth = createAsyncThunk(
   "auth/checkAuth",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get("http://localhost:5000/api/auth/checkAuth", {
+      const response = await axios.get("https://ecom-web-woad.vercel.app/api/auth/checkAuth", {
         withCredentials: true,
         headers: {
           "Cache-Control": "no-cache, no-store, must-revalidate, proxy-revalidate",
