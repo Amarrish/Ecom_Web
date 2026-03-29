@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import React from 'react'
-import ProductFilter from "@/components/shopping-view/filter";
+import ProductFilter from "@/components/Shopping-view/Filter";
 import ProductDetailsDialog from "@/components/Shopping-view/ProductDetailsDialog";
 import ShoppingProductTile from "@/components/Shopping-view/ShoppingProductTile";
 import {
