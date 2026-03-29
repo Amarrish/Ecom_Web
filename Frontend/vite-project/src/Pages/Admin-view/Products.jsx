@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/sheet";
 import { toast } from 'sonner';
 //  useToast
-import { addProductFormElements } from "@/Config";
+import { addProductFormElements } from "@/Config/Index";
 import {addNewProduct,deleteProduct,editProduct,fetchAllProducts,} from "@/store/Admin/ProductSlice";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
