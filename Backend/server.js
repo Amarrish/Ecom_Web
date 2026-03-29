@@ -40,7 +40,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors({
   origin: function(origin, callback) {
-    const allowedOrigins = [process.env.CLIENT_URL, 'https://ecom-web-lgh3.vercel.app/'].filter(Boolean);
+    const allowedOrigins = [process.env.CLIENT_URL, 'https://ecom-web-lgh3.vercel.app'].filter(Boolean);
     if (!origin) return callback(null, true);
     if (allowedOrigins.indexOf(origin) !== -1) {
       return callback(null, true);
@@ -65,6 +65,10 @@ app.use("/api/shop/order", shopOrderRouter);
 app.use("/api/shop/search", shopSearchRouter);
 app.use("/api/shop/review", shopReviewRouter);
 app.use("/api/common/feature", commonFeatureRouter);
+
+app.get('/', (req, res) => {
+  res.send('API is running');
+});
 
 // app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 module.exports = app;
