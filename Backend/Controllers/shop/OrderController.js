@@ -51,8 +51,8 @@ const createOrder = async (req, res) => {
         brand_name: "Your Brand Name",
         landing_page: "LOGIN",
         user_action: "PAY_NOW",
-        return_url: "http://localhost:5173/shop/paypal-return",
-        cancel_url: "http://localhost:5173/shop/paypal-cancel",
+        return_url: "https://ecom-web-ctpz.vercel.app/shop/paypal-return",
+        cancel_url: "https://ecom-web-ctpz.vercel.app/paypal-cancel",
       },
     };
 
