@@ -1,5 +1,5 @@
 import React from 'react'
-import { filterOptions } from "@/config";
+import { filterOptions } from "@/Config/Index";
 import { Fragment } from "react";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";

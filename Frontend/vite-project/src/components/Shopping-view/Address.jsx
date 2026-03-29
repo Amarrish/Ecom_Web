@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from "react";
 import CommonForm from "../common/form";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { addressFormControls } from "@/config";
+import { addressFormControls } from "@/Config/Index";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addNewAddress,
