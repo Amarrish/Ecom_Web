@@ -145,7 +145,7 @@ const forgotPassword = async (req, res) => {
     await user.save();
 
     const resetURL =
-      `http://localhost:5173/reset-password/${resetToken}`;
+      `https://ecom-web-ctpz.vercel.app/reset-password/${resetToken}`;
 
     const message = `
 Password Reset Link:
