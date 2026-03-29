@@ -10,7 +10,7 @@ import { checkAuth } from './store/auth-slice' // ...existing code...
 import { Toaster } from 'sonner'
 
 // ensure cookies are sent to backend
-axios.defaults.baseURL = 'https://ecom-web-woad.vercel.app'
+axios.defaults.baseURL = 'https://ecom-web-ywjw.vercel.app'
 axios.defaults.withCredentials = true
 
 // dispatch auth check before first render so redux has user state on refresh

@@ -12,7 +12,7 @@ export const addReview = createAsyncThunk(
   async (formdata, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `https://ecom-web-woad.vercel.app/api/shop/review/add`,
+        `https://ecom-web-ywjw.vercel.app/api/shop/review/add`,
         formdata
       );
       return response.data;
@@ -24,7 +24,7 @@ export const addReview = createAsyncThunk(
 
 export const getReviews = createAsyncThunk("/order/getReviews", async (id) => {
   const response = await axios.get(
-    `https://ecom-web-woad.vercel.app/api/shop/review/${id}`
+    `https://ecom-web-ywjw.vercel.app/api/shop/review/${id}`
   );
 
   return response.data;

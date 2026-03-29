@@ -40,7 +40,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors({
   origin: function(origin, callback) {
-    const allowedOrigins = [process.env.CLIENT_URL, 'https://ecom-web-lgh3.vercel.app'].filter(Boolean);
+    const allowedOrigins = [process.env.CLIENT_URL, 'https://ecom-web-ctpz.vercel.app'].filter(Boolean);
     if (!origin) return callback(null, true);
     if (allowedOrigins.indexOf(origin) !== -1) {
       return callback(null, true);

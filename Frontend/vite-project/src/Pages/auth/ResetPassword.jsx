@@ -20,7 +20,7 @@ function ResetPassword() {
       return;
      }
       const res = await axios.post(
-        `https://ecom-web-woad.vercel.app/api/auth/reset-password/${token}`,
+        `https://ecom-web-ywjw.vercel.app/api/auth/reset-password/${token}`,
         { password }
       );
 

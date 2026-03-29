@@ -13,7 +13,7 @@ export const createNewOrder = createAsyncThunk(
   "/order/createNewOrder",
   async (orderData) => {
     const response = await axios.post(
-      "https://ecom-web-woad.vercel.app/api/shop/order/create",
+      "https://ecom-web-ywjw.vercel.app/api/shop/order/create",
       orderData,
        { withCredentials: true } 
     );
@@ -26,7 +26,7 @@ export const capturePayment = createAsyncThunk(
   "/order/capturePayment",
   async ({ paymentId, payerId, orderId }) => {
     const response = await axios.post(
-      "https://ecom-web-woad.vercel.app/api/shop/order/capture",
+      "https://ecom-web-ywjw.vercel.app/api/shop/order/capture",
       {
         paymentId,
         payerId,
@@ -44,7 +44,7 @@ export const getAllOrdersByUserId = createAsyncThunk(
   "/order/getAllOrdersByUserId",
   async (userId) => {
     const response = await axios.get(
-      `https://ecom-web-woad.vercel.app/api/shop/order/list/${userId}`,
+      `https://ecom-web-ywjw.vercel.app/api/shop/order/list/${userId}`,
        { withCredentials: true } 
     );
  console.log(response,"response");
@@ -56,7 +56,7 @@ export const getOrderDetails = createAsyncThunk(
   "/order/getOrderDetails",
   async (id) => {
     const response = await axios.get(
-      `https://ecom-web-woad.vercel.app/api/shop/order/details/${id}`
+      `https://ecom-web-ywjw.vercel.app/api/shop/order/details/${id}`
     );
 
     return response.data;

@@ -17,7 +17,7 @@ export const fetchAllFilteredProducts = createAsyncThunk(
     });
 
     const result = await axios.get(
-      `https://ecom-web-woad.vercel.app/api/shop/products/get?${query}`
+      `https://ecom-web-ywjw.vercel.app/api/shop/products/get?${query}`
     );
 
     
@@ -30,7 +30,7 @@ export const fetchProductDetails = createAsyncThunk(
   "/products/fetchProductDetails",
   async (id) => {
     const result = await axios.get(
-      `https://ecom-web-woad.vercel.app/api/shop/products/get/${id}`
+      `https://ecom-web-ywjw.vercel.app/api/shop/products/get/${id}`
     );
 
     return result?.data;

@@ -16,7 +16,7 @@ function ForgotPassword() {
       setLoading(true);
 
       const res = await axios.post(
-        "https://ecom-web-woad.vercel.app/api/auth/forgot-password",
+        "https://ecom-web-ywjw.vercel.app/api/auth/forgot-password",
         { email }
       );
 
