@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import React from 'react'
-import Address from "@/components/shopping-view/address";
+import Address from "@/components/Shopping-view/Address";
 import img from "../../assets/checkout.gif";
 import { useDispatch, useSelector } from "react-redux";
 import UserCartItemsContent from "@/components/Shopping-view/CartItemContent";
