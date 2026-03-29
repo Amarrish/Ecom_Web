@@ -5,10 +5,6 @@ const User = require('../../Models/User');
 const crypto = require("crypto");
 const sendEmail = require("../../Helpers/sendEmail");
 
-const dotenv = require('dotenv');
-dotenv.config();
-
-
 // Register User
 const registerUser = async (req, res) => {
 
@@ -96,6 +92,7 @@ const loginUser = async (req, res) => {
             }
         })
     } catch (error) {
+        console.log("JWT_SECRET:", process.env.JWT_SECRET);
          console.log("LOGIN ERROR:", error);
         res.status(500).json({
             success: false,
