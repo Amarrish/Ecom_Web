@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { toast } from 'sonner';
-import { sortOptions } from "@/config";
+import { sortOptions } from "@/Config";
 import { addToCart, fetchCartItems } from "@/store/shop/cartslice";
 import {fetchAllFilteredProducts,fetchProductDetails,} from "@/store/shop/productslice";
 import { ArrowUpDownIcon } from "lucide-react";
